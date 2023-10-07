@@ -1,6 +1,23 @@
-# pos-utama
+# POS UTama
+## How to clone ?
 
-This template should help get you started developing with Vue 3 in Vite.
+1. Setup your ssh-key. Go to this link https://bitbucket.org/account/settings/ssh-keys/
+2. Add Key.
+3. Learn how to generate an SSH key. 
+
+```sh
+cd ~/.ssh/
+
+ssh-keygen -t rsa -C <your@email.adreess>
+```
+4. Copy and paste your key here with cat ~/.ssh/id_rsa.pub | pbcopy
+5. Copy your key into modal add ssh key form.
+6. Clone this project into your workspace, with this command line.
+
+```sh
+git clone https://rakamahardikaindra@bitbucket.org/kelompokutama/pos-utama.git
+```
+7. Congrats. You have successfully created a new SSH key and clone the project.
 
 ## Recommended IDE Setup
 
