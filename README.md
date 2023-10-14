@@ -17,6 +17,10 @@
     ```
 7. Congrats. You have successfully created a new SSH key and clone the project.
 
+## GIT Flow
+
+https://pos-utama.atlassian.net/wiki/spaces/~6254b24ea872710069203297/pages/2523137/GIT+Flow
+
 ## Recommended IDE Setup
 
 [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
