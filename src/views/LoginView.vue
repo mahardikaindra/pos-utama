@@ -15,15 +15,15 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref } from 'vue'
 
-const email = ref('');
-const password = ref('');
+const email = ref('')
+const password = ref('')
 
 const login = () => {
   // Implement login logic here
-  console.log('Login clicked with email:', email.value, 'and password:', password.value);
-};
+  console.log('Login clicked with email:', email.value, 'and password:', password.value)
+}
 </script>
 
 <style scoped>

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 defineProps<{
-  msg: string,
-  title: string,
+  msg: string
+  title: string
 }>()
 </script>
 
@@ -10,12 +10,15 @@ defineProps<{
     <h1 class="tw-font-medium tw-text-4xl tw-mb-4">{{ msg }}</h1>
     <h3 class="tw-text-xl">
       You’ve successfully created a project with
-      <a href="https://vitejs.dev/" target="_blank" rel="noopener" class="tw-text-blue-500">Vite</a> +
-      <a href="https://vuejs.org/" target="_blank" rel="noopener" class="tw-text-blue-500">{{ title }}</a>. What's next?
+      <a href="https://vitejs.dev/" target="_blank" rel="noopener" class="tw-text-blue-500">Vite</a>
+      +
+      <a href="https://vuejs.org/" target="_blank" rel="noopener" class="tw-text-blue-500">{{
+        title
+      }}</a
+      >. What's next?
     </h3>
   </div>
 </template>
-
 
 <style scoped>
 h1 {
