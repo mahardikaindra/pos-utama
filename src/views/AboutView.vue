@@ -1,8 +1,39 @@
 <template>
   <div class="about">
-    <h1>This is an about page, yuhuuu~</h1>
+    <div v-for="(item, index) in listItems" :key="index">
+       {{item?.name}}
+     </div>
   </div>
 </template>
+
+<script lang="ts">
+import di from '../di'
+
+interface Item {
+  name: string;
+}
+
+export default {
+  data(): { listItems: Item[] } {
+    return {
+      listItems: []
+    }
+  },
+  methods: {
+    async fetchingCharacters() {
+      try {
+        const {results} = await di.character.getAllCharacter()
+        this.listItems = results;
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  },
+  mounted() {
+    this.fetchingCharacters();
+  }
+}
+</script>
 
 <style>
 @media (min-width: 1024px) {

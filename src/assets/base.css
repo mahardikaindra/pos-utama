@@ -5,8 +5,8 @@
 @font-face {
   font-family: 'NunitoSans';
   src:
-    url('/public/fonts/NunitoSans.ttf') format('truetype'),
-    url('/public/fonts/NunitoSansItalic.ttf') format('truetype');
+    url('/fonts/NunitoSans.ttf') format('truetype'),
+    url('/fonts/NunitoSansItalic.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
