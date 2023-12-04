@@ -16,16 +16,16 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useAuthStore } from '@/stores/auth'
+import { useRouter } from 'vue-router'
+const router = useRouter()
 
-const email = ref('')
-const password = ref('')
+const email = ref('mail@rakamahardika.com')
+const password = ref('password')
 
 const login = () => {
-  // Implement login logic here
-  console.log('Login clicked with email:', email.value, 'and password:', password.value)
+  const authStore = useAuthStore()
+  authStore.login()
+  router.push('/')
 }
 </script>
-
-<style scoped>
-/* Add your styles here */
-</style>

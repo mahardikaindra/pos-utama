@@ -27,9 +27,22 @@
     </v-app-bar>
 
     <AppMain>
-      <p>Home</p>
+      <v-container>
+        <h1>Mahasiswa</h1>
+        <MahasiswaForm />
+        <v-container>
+          <v-list>
+            <v-list-item v-for="mahasiswa in mahasiswas" :key="mahasiswa.npm">
+              <v-list-item-content>
+                <v-list-item-title>{{ mahasiswa.npm }}</v-list-item-title>
+                <v-list-item-title>{{ mahasiswa.nama }}</v-list-item-title>
+                <v-list-item-subtitle>{{ mahasiswa.semester }}</v-list-item-subtitle>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list>
+        </v-container>
+      </v-container>
     </AppMain>
-
     <AppFooter />
   </v-app>
 </template>
@@ -38,8 +51,13 @@
 import { ref, onMounted } from 'vue'
 import AppFooter from '@/components/AppFooter.vue'
 import AppMain from '@/components/AppMain.vue'
-import { useAuthStore } from '@/stores/auth'
-const authStore = useAuthStore()
+import MahasiswaForm from '@/components/MahasiswaForm.vue'
+import { useMahasiswaStore } from '@/stores/mahasiswa';
+
+const mahasiswaStore = useMahasiswaStore();
+const mahasiswas = mahasiswaStore.getMahasiswas();
+
+
 const drawer = ref(false)
 
 const menuItems = ref([
@@ -69,57 +87,6 @@ const menuItems = ref([
   }
 ])
 
-const linkFooter = ref([
-  {
-    title: 'CONTACT',
-    link: '/contact',
-    markdownPath: './Markdown/GeneralInfo/contact.md',
-    data_cy: 'bottom_item_contact'
-  },
-  {
-    title: 'FAQ',
-    link: '/faq',
-    markdownPath: './Markdown/GeneralInfo/FAQ.vue',
-    data_cy: 'bottom_item_faq'
-  },
-  {
-    title: 'PRIVACY POLICY',
-    link: '/privacy-policy',
-    markdownPath: './Markdown/GeneralInfo/privacy_policy.md',
-    data_cy: 'bottom_item_privacy_policy'
-  },
-  {
-    title: 'TERM OF USE',
-    link: '/term-of-use',
-    markdownPath: './Markdown/GeneralInfo/term_of_use.md',
-    data_cy: 'bottom_item_terms_of_use'
-  },
-  {
-    title: 'GUIDE',
-    link: '/guide',
-    markdownPath: './Markdown/GeneralInfo/guide.vue',
-    data_cy: 'bottom_item_guide'
-  }
-])
-
-const isLogin = ref(authStore.isAuthenticated)
-
-const test = () => {
-  menuItems.value = [
-    {
-      icon: 'mdi-monitor-dashboard',
-      title: 'Mahasiswa',
-      link: '/mahasiswa',
-      color: 'orange darken-2'
-    }
-  ]
-}
-
-const toMarkdownFooter = (item: any) => {
-  // Your logic to handle the click event for footer items
-  console.log(`Clicked on ${item.title}. Path: ${item.markdownPath}`)
-  // You can perform actions like opening a modal, loading content, etc.
-}
 
 onMounted(() => {
   // Initialization logic when the component is mounted.

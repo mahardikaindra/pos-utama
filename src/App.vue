@@ -1,19 +1,21 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
+
+import { RouterLink, RouterView } from 'vue-router'
+import { useAuthStore } from '@/stores/auth'
+const authStore = useAuthStore()
 </script>
 
 <template>
-  <header>
+  <header v-if="!authStore.isAuthenticated">
     <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
     <div class="wrapper">
       <HelloWorld msg="Welcome POS Utama" title="Vue3 + Vuetify + Tailwindcss" />
 
       <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-        <RouterLink to="/login">Login</RouterLink>
+        <RouterLink v-if="authStore.isAuthenticated" to="/">Home</RouterLink>
+        <RouterLink v-if="authStore.isAuthenticated" to="/about">About</RouterLink>
       </nav>
     </div>
   </header>
@@ -22,6 +24,39 @@ import HelloWorld from './components/HelloWorld.vue'
 </template>
 
 <style scoped>
+#app {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+
+  font-weight: normal;
+}
+
+a,
+.green {
+  text-decoration: none;
+  color: hsla(160, 100%, 37%, 1);
+  transition: 0.4s;
+}
+
+@media (hover: hover) {
+  a:hover {
+    background-color: hsla(160, 100%, 37%, 0.2);
+  }
+}
+
+@media (min-width: 1024px) {
+  body {
+    display: flex;
+    place-items: center;
+  }
+
+  #app {
+    display: grid;
+    /* grid-template-columns: 1fr 1fr; */
+    padding: 0 2rem;
+  }
+}
 header {
   line-height: 1.5;
   max-height: 100vh;

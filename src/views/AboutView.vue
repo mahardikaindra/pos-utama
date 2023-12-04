@@ -1,77 +1,29 @@
 <template>
-  <v-container>
-    <v-row>
-      <v-col cols="12" sm="6">
-        <v-pagination
-          :length="info.pages"
-          @input="fetchCharacters"
-        ></v-pagination>
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col cols="12" sm="6">
-        <v-list>
-          <v-list-item v-for="character in listItems" :key="character?.id">
-            <v-list-item-content>
-              <v-list-item-title>{{ character.name }}</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-        </v-list>
-      </v-col>
-    </v-row>
-  </v-container>
+  <v-app id="inspire">
+    <AppNavigationDrawer v-model="drawer"/>
+    <AppHeader title="Sistem Perkuliahan" on-click-drawer="drawer = !drawer" />    
+    <AppMain>
+      <TheWelcome />
+    </AppMain>
+    <AppFooter />
+  </v-app>
 </template>
 
-<script lang="ts">
-import di from '../di'
+<script setup lang="ts">
+import { ref, onMounted } from 'vue'
+import TheWelcome from '@/components/TheWelcome.vue'
+import { useAuthStore } from '@/stores/auth'
+import AppFooter from '@/components/AppFooter.vue'
+import AppHeader from '@/components/AppHeader.vue'
+import AppMain from '@/components/AppMain.vue'
+import AppNavigationDrawer from '@/components/AppNavigationDrawer.vue'
+const authStore = useAuthStore()
+const drawer = ref(false)
 
-interface Character {
-  id: number;
-  name: string;
-}
+const isLogin = ref(authStore.isAuthenticated)
 
-interface Info {
-  count: number;
-  pages: number;
-  next: string;
-  prev: string;
-}
-
-export default {
-  data(): { listItems: Character[], info: Info } {
-    return {
-      listItems: [],
-      info: {
-        count: 0,
-        pages: 0,
-        next: '',
-        prev: '',
-      },
-    }
-  },
-  methods: {
-     async fetchCharacters() {
-       try {
-         const {results, info} = await di.character.getAllCharacter()
-         this.listItems = results;
-         this.info = info;
-       } catch (error) {
-         console.error(error);
-       }
-     }
-   },
-   mounted() {
-     this.fetchCharacters();
-   }
-}
+onMounted(() => {
+  // Initialization logic when the component is mounted.
+  // const mhs = new Mahasiswa('npm', 'nama', 3);
+})
 </script>
-
-<style>
-@media (min-width: 1024px) {
-  .about {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-  }
-}
-</style>
