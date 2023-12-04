@@ -12,20 +12,26 @@
       </v-card-text>
     </v-card>
   </v-container>
-</template>
-
-<script setup lang="ts">
-import { ref } from 'vue'
-
-const email = ref('')
-const password = ref('')
-
-const login = () => {
-  // Implement login logic here
-  console.log('Login clicked with email:', email.value, 'and password:', password.value)
-}
-</script>
-
-<style scoped>
-/* Add your styles here */
-</style>
+ </template>
+ 
+ <script lang="ts">
+ export default {
+  data() {
+    return {
+      email: '',
+      password: ''
+    }
+  },
+  methods: {
+    login() {
+      // Implement login logic here
+      console.log('Login clicked with email:', this.email, 'and password:', this.password)
+    }
+  }
+ }
+ </script>
+ 
+ <style scoped>
+ /* Add your styles here */
+ </style>
+ 
