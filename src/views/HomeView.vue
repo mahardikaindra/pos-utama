@@ -1,135 +1,29 @@
 <template>
-  <v-app id="inspire">
-    <v-navigation-drawer v-model="drawer">
-      <v-img
-        alt="Vue logo"
-        class="logo"
-        src="https://cdn.vuetifyjs.com/docs/images/brand-kit/v-text-logo-light.svg"
-        width="125"
-        height="125"
-      />
-      <v-list data-cy="btn_side_nav">
-        <v-list-item v-for="item in menuItems" :key="item.title" link :to="item.link">
-          <template v-slot:prepend>
-            <v-icon :color="item.color" :icon="item.icon">{{ item.icon }}</v-icon>
-          </template>
-
-          <v-list-item-title
-            ><span class="text-blue-darken-2">{{ item.title }}</span></v-list-item-title
-          >
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-
-    <v-app-bar>
-      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-app-bar-title>Sistem Mahasiswa</v-app-bar-title>
-    </v-app-bar>
-
-    <AppMain>
-      <p>Home</p>
-    </AppMain>
-
-    <AppFooter />
-  </v-app>
-</template>
-
-<script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import AppFooter from '@/components/AppFooter.vue'
-import AppMain from '@/components/AppMain.vue'
-import { useAuthStore } from '@/stores/auth'
-const authStore = useAuthStore()
-const drawer = ref(false)
-
-const menuItems = ref([
-  {
-    icon: 'mdi-monitor-dashboard',
-    title: 'Mahasiswa',
-    link: '/mahasiswa',
-    color: 'orange darken-2'
+  <BaseLayout>
+    <v-container>
+      <CharacterTable />
+    </v-container>
+  </BaseLayout>
+ </template>
+ 
+ <script lang="ts">
+ import { defineComponent } from 'vue';
+ import CharacterTable from '@/components/CharacterTable.vue';
+ import { useCharacterStore } from '@/stores/character';
+ import BaseLayout from '@/components/BaseLayout.vue';
+ 
+ export default defineComponent({
+  components: {
+    CharacterTable,
+    BaseLayout
   },
-  {
-    icon: 'mdi-api',
-    title: 'Mata Kuliah',
-    link: '/matkul',
-    color: 'green darken-2'
-  },
-  {
-    icon: 'mdi-nature-people',
-    title: 'Dosen',
-    link: '/dosen',
-    color: 'blue darken-2'
-  },
-  {
-    icon: 'mdi-nature-people',
-    title: 'About',
-    link: '/about',
-    color: 'blue darken-2'
+  setup() {
+    const characterStore = useCharacterStore();
+    characterStore.fetchCharacters();
+    return {
+      characters: characterStore.characters
+    };
   }
-])
-
-const linkFooter = ref([
-  {
-    title: 'CONTACT',
-    link: '/contact',
-    markdownPath: './Markdown/GeneralInfo/contact.md',
-    data_cy: 'bottom_item_contact'
-  },
-  {
-    title: 'FAQ',
-    link: '/faq',
-    markdownPath: './Markdown/GeneralInfo/FAQ.vue',
-    data_cy: 'bottom_item_faq'
-  },
-  {
-    title: 'PRIVACY POLICY',
-    link: '/privacy-policy',
-    markdownPath: './Markdown/GeneralInfo/privacy_policy.md',
-    data_cy: 'bottom_item_privacy_policy'
-  },
-  {
-    title: 'TERM OF USE',
-    link: '/term-of-use',
-    markdownPath: './Markdown/GeneralInfo/term_of_use.md',
-    data_cy: 'bottom_item_terms_of_use'
-  },
-  {
-    title: 'GUIDE',
-    link: '/guide',
-    markdownPath: './Markdown/GeneralInfo/guide.vue',
-    data_cy: 'bottom_item_guide'
-  }
-])
-
-const isLogin = ref(authStore.isAuthenticated)
-
-const test = () => {
-  menuItems.value = [
-    {
-      icon: 'mdi-monitor-dashboard',
-      title: 'Mahasiswa',
-      link: '/mahasiswa',
-      color: 'orange darken-2'
-    }
-  ]
-}
-
-const toMarkdownFooter = (item: any) => {
-  // Your logic to handle the click event for footer items
-  console.log(`Clicked on ${item.title}. Path: ${item.markdownPath}`)
-  // You can perform actions like opening a modal, loading content, etc.
-}
-
-onMounted(() => {
-  // Initialization logic when the component is mounted.
-  // const mhs = new Mahasiswa('npm', 'nama', 3);
-})
-</script>
-
-<style scoped>
-.logo {
-  display: block;
-  margin: 0 auto 0.5rem;
-}
-</style>
+ });
+ </script>
+ 

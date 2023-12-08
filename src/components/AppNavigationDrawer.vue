@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer v-model="drawerProp">
+  <v-navigation-drawer v-model="drawer">
     <v-img
       alt="Vue logo"
       class="logo"
@@ -10,20 +10,38 @@
     <v-list data-cy="btn_side_nav">
       <v-list-item v-for="item in menuItems" :key="item.title" link :to="item.link">
         <template v-slot:prepend>
-          <v-icon :class="item.icon" class="white--text">{{ item.icon }}</v-icon>
+          <v-icon :color="item.color" :icon="item.icon">{{ item.icon }}</v-icon>
         </template>
- 
-        <v-list-item-title><span class="text-blue-darken-2">{{ item.title }}</span></v-list-item-title>
+
+        <v-list-item-title
+          ><span class="text-blue-darken-2">{{ item.title }}</span></v-list-item-title
+        >
       </v-list-item>
     </v-list>
   </v-navigation-drawer>
- </template>
- <script setup lang="ts">
- import { ref, defineProps, defineEmits, onUpdated } from 'vue';
- 
- const { modelValue } = defineProps(['modelValue']);
- 
- const menuItems = ref([
+
+  <v-app-bar>
+    <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+    <v-app-bar-title>Sistem Mahasiswa</v-app-bar-title>
+    <v-spacer></v-spacer>
+    <v-btn icon>
+      <v-icon>mdi-magnify</v-icon>
+    </v-btn>
+    <v-btn>
+      <v-avatar color="info">
+        <span class="text-h6">RM</span>
+      </v-avatar>
+    </v-btn>
+    <v-btn icon>
+      <v-icon>mdi-dots-vertical</v-icon>
+    </v-btn>
+  </v-app-bar>
+</template>
+<script setup lang="ts">
+import { ref } from 'vue'
+const drawer = ref(false)
+
+const menuItems = ref([
   {
     icon: 'mdi-monitor-dashboard',
     title: 'Mahasiswa',
@@ -48,20 +66,12 @@
     link: '/about',
     color: 'blue darken-2'
   }
- ]);
- 
- const drawerProp = ref(modelValue);
- const emit = defineEmits(['update:modelValue']);
- 
- onUpdated(() => {
-  emit('update:modelValue', drawerProp.value);
- });
- </script>
- 
- <style scoped>
- .logo {
+])
+</script>
+
+<style scoped>
+.logo {
   display: block;
   margin: 0 auto 0.5rem;
- }
- </style>
- 
+}
+</style>

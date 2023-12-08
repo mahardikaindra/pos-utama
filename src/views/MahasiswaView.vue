@@ -1,92 +1,31 @@
 <template>
-  <v-app id="inspire">
-    <v-navigation-drawer v-model="drawer">
-      <v-img
-        alt="Vue logo"
-        class="logo"
-        src="https://cdn.vuetifyjs.com/docs/images/brand-kit/v-text-logo-light.svg"
-        width="125"
-        height="125"
-      />
-      <v-list data-cy="btn_side_nav">
-        <v-list-item v-for="item in menuItems" :key="item.title" link :to="item.link">
-          <template v-slot:prepend>
-            <v-icon :color="item.color" :icon="item.icon">{{ item.icon }}</v-icon>
-          </template>
-
-          <v-list-item-title
-            ><span class="text-blue-darken-2">{{ item.title }}</span></v-list-item-title
-          >
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-
-    <v-app-bar>
-      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-app-bar-title>Sistem Mahasiswa</v-app-bar-title>
-    </v-app-bar>
-
-    <AppMain>
+  <BaseLayout>
+    <v-container>
+      <h1>Mahasiswa</h1>
+      <MahasiswaForm />
       <v-container>
-        <h1>Mahasiswa</h1>
-        <MahasiswaForm />
-        <v-container>
-          <v-list>
-            <v-list-item v-for="mahasiswa in mahasiswas" :key="mahasiswa.npm">
-              <v-list-item-content>
-                <v-list-item-title>{{ mahasiswa.npm }}</v-list-item-title>
-                <v-list-item-title>{{ mahasiswa.nama }}</v-list-item-title>
-                <v-list-item-subtitle>{{ mahasiswa.semester }}</v-list-item-subtitle>
-              </v-list-item-content>
-            </v-list-item>
-          </v-list>
-        </v-container>
+        <v-list>
+          <v-list-item v-for="mahasiswa in mahasiswas" :key="mahasiswa.npm">
+            <v-list-item-content>
+              <v-list-item-title>{{ mahasiswa.npm }}</v-list-item-title>
+              <v-list-item-title>{{ mahasiswa.nama }}</v-list-item-title>
+              <v-list-item-subtitle>{{ mahasiswa.semester }}</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list>
       </v-container>
-    </AppMain>
-    <AppFooter />
-  </v-app>
+    </v-container>
+  </BaseLayout>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import AppFooter from '@/components/AppFooter.vue'
-import AppMain from '@/components/AppMain.vue'
+import { onMounted } from 'vue'
+import BaseLayout from '@/components/BaseLayout.vue'
 import MahasiswaForm from '@/components/MahasiswaForm.vue'
-import { useMahasiswaStore } from '@/stores/mahasiswa';
+import { useMahasiswaStore } from '@/stores/mahasiswa'
 
-const mahasiswaStore = useMahasiswaStore();
-const mahasiswas = mahasiswaStore.getMahasiswas();
-
-
-const drawer = ref(false)
-
-const menuItems = ref([
-  {
-    icon: 'mdi-monitor-dashboard',
-    title: 'Mahasiswa',
-    link: '/mahasiswa',
-    color: 'orange darken-2'
-  },
-  {
-    icon: 'mdi-api',
-    title: 'Mata Kuliah',
-    link: '/matkul',
-    color: 'green darken-2'
-  },
-  {
-    icon: 'mdi-nature-people',
-    title: 'Dosen',
-    link: '/dosen',
-    color: 'blue darken-2'
-  },
-  {
-    icon: 'mdi-nature-people',
-    title: 'About',
-    link: '/about',
-    color: 'blue darken-2'
-  }
-])
-
+const mahasiswaStore = useMahasiswaStore()
+const mahasiswas = mahasiswaStore.getMahasiswas()
 
 onMounted(() => {
   // Initialization logic when the component is mounted.
