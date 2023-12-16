@@ -1,4 +1,4 @@
-// auth.ts
+// authentication.ts
 import { defineStore } from 'pinia'
 
 export const useAuthStore = defineStore('auth', {
@@ -6,9 +6,10 @@ export const useAuthStore = defineStore('auth', {
     isAuthenticated: false
   }),
   actions: {
-    login() {
+    login(email: string, password: string) {
       // Perform authentication logic (e.g., API call, token validation)
       // Update isAuthenticated based on the result
+      console.log(email, password)
       this.isAuthenticated = true
     },
     logout() {

@@ -1,4 +1,5 @@
 import { useAuthStore } from '@/stores/auth'
+
 const authGuard = async (to: any, from: any, next: any) => {
   const authStore = useAuthStore()
 
