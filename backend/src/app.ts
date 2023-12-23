@@ -46,7 +46,10 @@ app.post('/users', (req, res) => {
       res.status(500).send('Error creating user');
       return;
     }
-    res.status(201).send('User created successfully');
+    if(result) {
+      console.log("User created successfully", result);
+      res.status(201).send('User created successfully');
+    }
   });
 });
 
@@ -60,7 +63,10 @@ app.put('/users/:id', (req, res) => {
       res.status(500).send('Error updating user');
       return;
     }
-    res.status(200).send('User updated successfully');
+    if(result) {
+      console.log("User updated successfully", result);
+      res.status(200).send('User updated successfully');
+    }
   });
 });
 
@@ -73,7 +79,10 @@ app.delete('/users/:id', (req, res) => {
       res.status(500).send('Error deleting user');
       return;
     }
-    res.status(200).send('User deleted successfully');
+    if(result) {
+      console.log("User deleted successfully", result);
+      res.status(200).send('User deleted successfully');
+    }
   });
 });
 

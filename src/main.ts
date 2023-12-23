@@ -14,18 +14,18 @@ import router from './router'
 const app = createApp(App)
 
 const i18n = createI18n({
-    legacy: false,
-    locale: 'id',
-    fallbackLocale: 'en'
+  legacy: false,
+  locale: 'id',
+  fallbackLocale: 'en'
 })
 
 const vuetify = createVuetify({
- components,
- directives,
- ssr: true,
- locale: {
+  components,
+  directives,
+  ssr: true,
+  locale: {
     adapter: createVueI18nAdapter({ i18n, useI18n })
- }
+  }
 })
 
 app.use(createPinia())

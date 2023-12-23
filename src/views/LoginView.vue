@@ -14,7 +14,13 @@
       <v-card-text>
         <v-form @submit.prevent="SubmitForm">
           <v-text-field v-model="email" label="Email" required :rules="rules.email"></v-text-field>
-          <v-text-field v-model="password" label="Password" type="password" required :rules="rules.password"></v-text-field>
+          <v-text-field
+            v-model="password"
+            label="Password"
+            type="password"
+            required
+            :rules="rules.password"
+          ></v-text-field>
           <v-btn type="submit" color="primary" :disabled="!isFormValid">Login</v-btn>
         </v-form>
         <v-snackbar v-model="errorSnackbar" color="error">
@@ -26,55 +32,58 @@
 </template>
 
 <script lang="ts">
-import HelloWorld from '@/components/HelloWorld.vue';
-import { useAuthStore } from '@/stores/auth';
-import { useRouter } from 'vue-router';
+import HelloWorld from '@/components/HelloWorld.vue'
+import { useAuthStore } from '@/stores/auth'
+import { useRouter } from 'vue-router'
 
 export default {
- components: {
-   HelloWorld,
- },
- setup() {
-   const router = useRouter();
-   const authStore = useAuthStore();
+  components: {
+    HelloWorld
+  },
+  setup() {
+    const router = useRouter()
+    const authStore = useAuthStore()
 
-   return {
-     router,
-     authStore
-   };
- },
- data() {
-   return {
-     email: 'raka@mahardika.com',
-     password: 'password',
-     rules: {
-       email: [(val: any) => !!val || 'Email is required'],
-       password: [(val: any) => !!val || 'Password is required'],
-     },
-     errorSnackbar: false,
-     errorMessage: '',
-   };
- },
- computed: {
-   isFormValid() {
-     return this.rules.email.every((rule) => rule(this.email) === true) && this.rules.password.every((rule) => rule(this.password) === true);
-   },
- },
- methods: {
-   SubmitForm() {
-     try {
-       this.authStore.login(this.email, this.password);
-       this.router.push('/');
-     } catch (error: any) {
-       this.showErrorSnackbar(error.message || 'An error occurred during login');
-     }
-   },
-   showErrorSnackbar(message: string) {
-     this.errorMessage = message;
-     this.errorSnackbar = true;
-   },
- },
-};
+    return {
+      router,
+      authStore
+    }
+  },
+  data() {
+    return {
+      email: 'raka@mahardika.com',
+      password: 'password',
+      rules: {
+        email: [(val: any) => !!val || 'Email is required'],
+        password: [(val: any) => !!val || 'Password is required']
+      },
+      errorSnackbar: false,
+      errorMessage: ''
+    }
+  },
+  computed: {
+    isFormValid() {
+      return (
+        this.rules.email.every((rule) => rule(this.email) === true) &&
+        this.rules.password.every((rule) => rule(this.password) === true)
+      )
+    }
+  },
+  methods: {
+    SubmitForm() {
+      try {
+        this.authStore.login(this.email, this.password)
+        this.router.push('/')
+      } catch (error: any) {
+        this.showErrorSnackbar(error.message || 'An error occurred during login')
+      }
+    },
+    showErrorSnackbar(message: string) {
+      this.errorMessage = message
+      this.errorSnackbar = true
+    }
+  }
+}
 </script>
 
 <style scoped>
