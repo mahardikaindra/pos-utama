@@ -5,10 +5,8 @@ import database from './database';
 const app = express();
 const PORT = 3000;
 
-// Middleware to parse JSON requests
 app.use(express.json());
 
-// Read all users
 app.get('/users', (req, res) => {
   database.query('SELECT * FROM users', (error, results) => {
     if (error) {
@@ -20,7 +18,6 @@ app.get('/users', (req, res) => {
   });
 });
 
-// Read a single user
 app.get('/users/:id', (req, res) => {
   const userId = req.params.id;
   database.query('SELECT * FROM users WHERE id = ?', userId, (error, result) => {
@@ -37,7 +34,6 @@ app.get('/users/:id', (req, res) => {
   });
 });
 
-// Create a new user
 app.post('/users', (req, res) => {
   const newUser = req.body;
   database.query('INSERT INTO users SET ?', newUser, (error, result) => {
@@ -53,7 +49,6 @@ app.post('/users', (req, res) => {
   });
 });
 
-// Update a user
 app.put('/users/:id', (req, res) => {
   const userId = req.params.id;
   const updatedUser = req.body;
@@ -70,7 +65,6 @@ app.put('/users/:id', (req, res) => {
   });
 });
 
-// Delete a user
 app.delete('/users/:id', (req, res) => {
   const userId = req.params.id;
   database.query('DELETE FROM users WHERE id = ?', userId, (error, result) => {

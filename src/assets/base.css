@@ -89,6 +89,7 @@ body {
     'Helvetica Neue',
     sans-serif; */
   font-size: 15px;
+  color: #181818;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
