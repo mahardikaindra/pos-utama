@@ -10,23 +10,23 @@ const routes: Array<RouteRecordRaw> = [
     beforeEnter: authGuard
   },
   {
-    path: '/mahasiswa',
-    name: 'mahasiswa',
-    component: () => import('../views/MahasiswaView.vue'),
+    path: '/student',
+    name: 'student',
+    component: () => import('../views/StudentView.vue'),
     meta: { requiresAuth: true },
     beforeEnter: authGuard
   },
   {
-    path: '/matkul',
-    name: 'matkul',
-    component: () => import('../views/MatakulView.vue'),
+    path: '/subject',
+    name: 'subject',
+    component: () => import('../views/SubjectView.vue'),
     meta: { requiresAuth: true },
     beforeEnter: authGuard
   },
   {
-    path: '/dosen',
-    name: 'dosen',
-    component: () => import('../views/DosenView.vue'),
+    path: '/lecture',
+    name: 'lecture',
+    component: () => import('../views/LectureView.vue'),
     meta: { requiresAuth: true },
     beforeEnter: authGuard
   },

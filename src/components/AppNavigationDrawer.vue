@@ -45,19 +45,19 @@ const menuItems = ref([
   {
     icon: 'mdi-monitor-dashboard',
     title: 'Mahasiswa',
-    link: '/mahasiswa',
+    link: '/student',
     color: 'orange darken-2'
   },
   {
     icon: 'mdi-api',
     title: 'Mata Kuliah',
-    link: '/matkul',
+    link: '/subject',
     color: 'green darken-2'
   },
   {
     icon: 'mdi-nature-people',
     title: 'Dosen',
-    link: '/dosen',
+    link: '/lecture',
     color: 'blue darken-2'
   },
   {

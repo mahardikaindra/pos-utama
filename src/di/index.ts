@@ -11,5 +11,8 @@ const cPresenters = presenters(cUseCases)
 
 export default {
   character: cPresenters.character,
+  lecture: cPresenters.lecture,
+  student: cPresenters.student,
+  subject: cPresenters.subject,
   episode: cPresenters.episode
 } as IPresenters
