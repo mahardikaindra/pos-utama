@@ -1,6 +1,6 @@
 <template>
   <BaseLayout>
-    <h1>About Page</h1>
+    <h1>Dosen Page</h1>
   </BaseLayout>
 </template>
 
